@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tạo Job Posting</title>
+</head>
+<body>
+<h1>Tạo Job Posting Mới</h1>
+<form action="/dashboard/jobposting/save" method="post">
+    <div>
+        <label for="title">Tiêu Đề:</label>
+        <input type="text" id="title" name="title" required>
+    </div>
+    <div>
+        <label for="description">Mô Tả:</label>
+        <textarea id="description" name="description" required></textarea>
+    </div>
+    <div>
+        <label for="expiresAt">Ngày Kết Thúc:</label>
+        <input type="date" id="expiresAt" name="expiresAt" required>
+    </div>
+    <div>
+        <label for="position">Vị Trí:</label>
+        <input type="text" id="position" name="position" required>
+    </div>
+    <div>
+        <label for="requiredSkills">Kỹ Năng:</label>
+        <input type="text" id="requiredSkills" name="requiredSkills" placeholder="Java, Spring Boot, SQL" required>
+    </div>
+    <div>
+        <label for="suggestedSalary">Lương Đề Nghị:</label>
+        <input type="text" id="suggestedSalary" name="suggestedSalary">
+    </div>
+    <div>
+        <label for="yearOfExperience">Năm kinh nghiệm:</label>
+        <input type="text" id="yearOfExperience" name="yearOfExperience">
+    </div>
+    <div>
+        <label for="quantity">Năm kinh nghiệm:</label>
+        <input type="text" id="quantity" name="quantity">
+    </div>
+    <div>
+        <label for="status">Trạng Thái:</label>
+        <select id="status" name="status" required>
+            <option value="1">Mở</option>
+            <option value="0">Đóng</option>
+        </select>
+
+    </div>
+    <div>
+        <label for="companyId">Công Ty:</label>
+        <select id="companyId" name="company.id" required>
+            <option th:each="company : ${companies}"
+                    th:value="${company.id}"
+                    th:text="${company.compName}">
+            </option>
+        </select>
+    </div>
+    <button type="submit">Tạo Job Posting</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+        <title>Job Posting Details</title>
+</head>
+<body>
+<h1>Chi Tiết Công Việc</h1>
+<table>
+        <tr>
+                <th>Tiêu Đề:</th>
+                <td th:text="${jobPosting.title}">[Tiêu Đề]</td>
+        </tr>
+        <tr>
+                <th>Mô Tả:</th>
+                <td th:text="${jobPosting.description}">[Mô Tả]</td>
+        </tr>
+        <tr>
+                <th>Ngày Đăng:</th>
+                <td th:text="${jobPosting.postedAt}">[Ngày Đăng]</td>
+        </tr>
+        <tr>
+                <th>Ngày Kết Thúc:</th>
+                <td th:text="${jobPosting.expiresAt}">[Ngày Kết Thúc]</td>
+        </tr>
+        <tr>
+                <th>Vị Trí:</th>
+                <td th:text="${jobPosting.position}">[Vị Trí]</td>
+        </tr>
+        <tr>
+                <th>Kỹ năng cần có:</th>
+                <td th:text="${jobPosting.requiredSkills}">[Kỹ Năng]</td>
+        </tr>
+        <tr>
+                <th>Lương đề nghị:</th>
+                <td th:text="${jobPosting.suggestedSalary}">[Lương]</td>
+        </tr>
+        <tr>
+                <th>Người Phỏng Vấn:</th>
+                <td th:text="${jobPosting.company.compName}">[Người Phỏng Vấn]</td>
+        </tr>
+        <tr>
+                <th>Số lượng:</th>
+                <td th:text="${jobPosting.quantity}">[Số lượng]</td>
+        </tr>
+        <tr>
+                <th>Liên hệ:</th>
+                <td th:text="${jobPosting.company.compName}">[Người Phỏng Vấn:]</td>
+                <td th:text="${jobPosting.company.email}">[Email:]</td>
+                <td th:text="${jobPosting.company.phone}">[Điện thoại:]</td>
+                <td th:text="${jobPosting.company.webUrl}">[Website:]</td>
+        </tr>
+
+
+</table>
+<a href="javascript:history.back()">Quay Lại Danh Sách</a>
+</body>
+</html>
