@@ -12,4 +12,11 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long> {
 
     @Query("SELECT c FROM Candidate c JOIN c.jobPostings jp WHERE jp.id = :jobPostingId")
     Set<Candidate> findByJobPostingId(Long jobPostingId);
+
+    @Query("SELECT DISTINCT c FROM Candidate c " +
+            "JOIN c.jobPostings jp " +
+            "LEFT JOIN FETCH c.candidateSkills cs " +
+            "LEFT JOIN FETCH cs.skill " +
+            "WHERE jp.id = :jobPostingId")
+    Set<Candidate> findCandidatesByJobPostingIdWithSkills(@Param("jobPostingId") Long jobPostingId);
 }

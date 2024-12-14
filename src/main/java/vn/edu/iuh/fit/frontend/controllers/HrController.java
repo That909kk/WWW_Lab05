@@ -196,14 +196,29 @@ public class HrController {
         return "redirect:/dashboard/hr"; // Quay lại trang Dashboard
     }
 
-    // Hiển thị danh sách ứng viên ứng tuyển vào một công việc cụ thể
-    @GetMapping("/dashboard/jobposting/{id}")
-    public String listCandidatesByJobPosting(@PathVariable Long id, Model model) {
-        Set<Candidate> candidates = candidateService.findCandidatesByJobPostingId(id);
-        model.addAttribute("candidates", candidates);
-        model.addAttribute("headerTitle", "Danh Sách Ứng Viên Công Việc (ID: " + id + ")");
-        return "hrs/jobposting-candidate";
+//    // Hiển thị danh sách ứng viên ứng tuyển vào một công việc cụ thể
+//    @GetMapping("/dashboard/jobposting/{id}")
+//    public String listCandidatesByJobPosting(@PathVariable Long id, Model model) {
+//        Set<Candidate> candidates = candidateService.findCandidatesByJobPostingId(id);
+//        model.addAttribute("candidates", candidates);
+//        model.addAttribute("headerTitle", "Danh Sách Ứng Viên Công Việc (ID: " + id + ")");
+//        return "hrs/jobposting-candidate";
+//    }
+@GetMapping("/dashboard/jobposting/{id}")
+public String listCandidatesByJobPosting(@PathVariable Long id, Model model) {
+    Set<Candidate> candidates = candidateService.findCandidatesByJobPostingId(id);
+    Map<Long, List<Skill>> candidateSkills = new HashMap<>();
+
+    for (Candidate candidate : candidates) {
+        List<Skill> skills = candidateService.findSkillsByCandidateId(candidate.getId());
+        candidateSkills.put(candidate.getId(), skills);
     }
+
+    model.addAttribute("candidates", candidates);
+    model.addAttribute("candidateSkills", candidateSkills);
+    model.addAttribute("headerTitle", "Danh Sách Ứng Viên Công Việc (ID: " + id + ")");
+    return "hrs/jobposting-candidate";
+}
 }
 
 

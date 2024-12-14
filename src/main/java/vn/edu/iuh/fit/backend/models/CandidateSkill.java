@@ -17,10 +17,14 @@ public class CandidateSkill {
     @JoinColumn(name = "can_id", nullable = false)
     private Candidate can;
 
+    @MapsId("skillId")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "skill_id", nullable = false) // Liên kết tới Skill
+    private Skill skill;
+
     @Column(name = "more_infos", length = 1000)
     private String moreInfos;
 
     @Column(name = "skill_level", nullable = false)
     private Byte skillLevel;
-
 }

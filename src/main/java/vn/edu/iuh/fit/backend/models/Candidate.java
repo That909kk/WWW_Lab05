@@ -35,4 +35,7 @@ public class Candidate {
 
     @ManyToMany(mappedBy = "candidates")
     private Set<JobPosting> jobPostings;
+
+    @OneToMany(mappedBy = "can", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<CandidateSkill> candidateSkills;
 }

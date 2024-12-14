@@ -1,3 +1,33 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Danh Sách Ứng Viên Công Việc</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1 th:text="${headerTitle}">Danh Sách Ứng Viên Công Việc</h1>-->
+<!--<table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>ID</th>-->
+<!--        <th>Tên</th>-->
+<!--        <th>Email</th>-->
+<!--        <th>Số Điện Thoại</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="candidate : ${candidates}">-->
+<!--        <td th:text="${candidate.id}"></td>-->
+<!--        <td th:text="${candidate.fullName}"></td>-->
+<!--        <td th:text="${candidate.email}"></td>-->
+<!--        <td th:text="${candidate.phone}"></td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+<!--<a href="/dashboard/hr">Quay Lại</a>-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
@@ -14,6 +44,7 @@
         <th>Tên</th>
         <th>Email</th>
         <th>Số Điện Thoại</th>
+        <th>Kỹ Năng</th> <!-- Thêm cột kỹ năng -->
     </tr>
     </thead>
     <tbody>
@@ -22,6 +53,12 @@
         <td th:text="${candidate.fullName}"></td>
         <td th:text="${candidate.email}"></td>
         <td th:text="${candidate.phone}"></td>
+        <td>
+            <ul>
+                <!-- Hiển thị danh sách kỹ năng -->
+                <li th:each="skill : ${candidateSkills[candidate.id]}" th:text="${skill.skillName}"></li>
+            </ul>
+        </td>
     </tr>
     </tbody>
 </table>

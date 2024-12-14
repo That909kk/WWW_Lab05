@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import vn.edu.iuh.fit.backend.models.Candidate;
 import vn.edu.iuh.fit.backend.models.CandidateSkill;
+import vn.edu.iuh.fit.backend.models.Skill;
 import vn.edu.iuh.fit.backend.repositories.CandidateRepository;
+import vn.edu.iuh.fit.backend.repositories.CandidateSkillRepository;
 
 import java.util.List;
 import java.util.Set;
@@ -51,7 +53,20 @@ public class CandidateService {
         candidateRepository.deleteById(id);
     }
     // Lấy ứng viên theo JobPosting ID
+//    public Set<Candidate> findCandidatesByJobPostingId(Long jobPostingId) {
+//        return candidateRepository.findByJobPostingId(jobPostingId);
+//    }
+
+    //Mới
+
+    @Autowired
+    private CandidateSkillRepository candidateSkillRepository;
     public Set<Candidate> findCandidatesByJobPostingId(Long jobPostingId) {
-        return candidateRepository.findByJobPostingId(jobPostingId);
+        return candidateRepository.findCandidatesByJobPostingIdWithSkills(jobPostingId);
     }
+
+    public List<Skill> findSkillsByCandidateId(Long candidateId) {
+        return candidateSkillRepository.findSkillsByCandidateId(candidateId);
+    }
+
 }
