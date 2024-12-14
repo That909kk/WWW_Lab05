@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 
 import vn.edu.iuh.fit.backend.models.Candidate;
 import vn.edu.iuh.fit.backend.models.CandidateSkill;
+import vn.edu.iuh.fit.backend.models.JobPosting;
 import vn.edu.iuh.fit.backend.models.Skill;
 import vn.edu.iuh.fit.backend.repositories.CandidateRepository;
 import vn.edu.iuh.fit.backend.repositories.CandidateSkillRepository;
+import vn.edu.iuh.fit.backend.repositories.JobPostingRepository;
 
 import java.util.List;
 import java.util.Set;
@@ -68,5 +70,8 @@ public class CandidateService {
     public List<Skill> findSkillsByCandidateId(Long candidateId) {
         return candidateSkillRepository.findSkillsByCandidateId(candidateId);
     }
+
+
+
 
 }

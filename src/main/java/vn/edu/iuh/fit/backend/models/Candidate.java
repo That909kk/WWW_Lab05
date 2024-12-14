@@ -38,4 +38,8 @@ public class Candidate {
 
     @OneToMany(mappedBy = "can", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<CandidateSkill> candidateSkills;
+
+    public Long getJobPostingId() {
+        return jobPostings.stream().findFirst().get().getId();
+    }
 }
