@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import vn.edu.iuh.fit.backend.models.Candidate;
+import vn.edu.iuh.fit.backend.models.CandidateSkill;
 import vn.edu.iuh.fit.backend.repositories.CandidateRepository;
 
 import java.util.List;
@@ -53,5 +54,4 @@ public class CandidateService {
     public Set<Candidate> findCandidatesByJobPostingId(Long jobPostingId) {
         return candidateRepository.findByJobPostingId(jobPostingId);
     }
-
 }

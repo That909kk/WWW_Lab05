@@ -48,7 +48,6 @@
             <th>Ngày Kết Thúc</th>
             <th>Công Ty</th>
             <th>Trạng Thái</th>
-
             <th>Hành Động</th>
         </tr>
         </thead>
@@ -67,6 +66,7 @@
                     Đổi Trạng Thái
                 </button>
                 <a th:href="@{/dashboard/xemthem/{id}(id=${jobposting.id})}" class="btn btn-info btn-sm">Xem Thêm</a>
+                <a th:href="@{/dashboard/jobposting/{id}(id=${jobposting.id})}" class="btn btn-info btn-sm">Xem ứng viên</a>
             </td>
         </tr>
         </tbody>
@@ -94,7 +94,7 @@
         }
     </script>
     <!-- Candidate Section -->
-    <h2>Danh Sách Ứng Viên</h2>
+    <h2>Danh Sách Tất Cả Ứng Viên</h2>
     <table class="table table-hover">
         <thead class="table-dark">
         <tr>

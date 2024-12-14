@@ -4,12 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import vn.edu.iuh.fit.backend.models.Candidate;
 import vn.edu.iuh.fit.backend.models.JobPosting;
+import vn.edu.iuh.fit.backend.services.CandidateService;
 import vn.edu.iuh.fit.backend.services.CompanyService;
 import vn.edu.iuh.fit.backend.services.JobPostingService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/dashboard")
@@ -32,6 +35,22 @@ public class JobPostingController {
 
         return "candidates/jobposting-detail"; // Tên file HTML để hiển thị chi tiết
     }
+
+
+
+    @Autowired
+    private CandidateService candidateService;
+    @GetMapping("/hr/jobposting/{id}")
+    public String listCandidatesByJobPosting(@PathVariable Long id, Model model) {
+        Set<Candidate> candidates = candidateService.findCandidatesByJobPostingId(id);
+        model.addAttribute("candidates", candidates);
+        model.addAttribute("headerTitle", "Danh Sách Ứng Viên Công Việc (ID: " + id + ")");
+
+        // Trả về giao diện
+        return "hrs/jobposting-candidate";
+    }
+
+
     @Autowired
     private CompanyService companyService;
 
@@ -50,5 +69,6 @@ public class JobPostingController {
         jobPostingService.saveJobPosting(jobPosting);
         return "redirect:/dashboard/candidate";
     }
+
 
 }

@@ -189,23 +189,20 @@ public class HrController {
         // Trả về giao diện
         return "hrs/dashboard-hr";
     }
-
-    // Hiển thị danh sách ứng viên ứng tuyển vào một công việc cụ thể
-    @GetMapping("/dashboard/hr/jobposting/{id}")
-    public String listCandidatesByJobPosting(@PathVariable Long id, Model model) {
-        Set<Candidate> candidates = candidateService.findCandidatesByJobPostingId(id);
-        model.addAttribute("candidates", candidates);
-        model.addAttribute("headerTitle", "Danh Sách Ứng Viên Công Việc (ID: " + id + ")");
-
-        // Trả về giao diện
-        return "hrs/dashboard-hr";
-    }
-
     // Thay đổi trạng thái JobPosting
     @GetMapping("/dashboard/jobposting/change-status/{id}")
     public String changeStatus(@PathVariable Long id) {
         jobPostingService.toggleStatus(id); // Thay đổi trạng thái
         return "redirect:/dashboard/hr"; // Quay lại trang Dashboard
+    }
+
+    // Hiển thị danh sách ứng viên ứng tuyển vào một công việc cụ thể
+    @GetMapping("/dashboard/jobposting/{id}")
+    public String listCandidatesByJobPosting(@PathVariable Long id, Model model) {
+        Set<Candidate> candidates = candidateService.findCandidatesByJobPostingId(id);
+        model.addAttribute("candidates", candidates);
+        model.addAttribute("headerTitle", "Danh Sách Ứng Viên Công Việc (ID: " + id + ")");
+        return "hrs/jobposting-candidate";
     }
 }
 
