@@ -4,19 +4,19 @@ package vn.edu.iuh.fit.frontend.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import vn.edu.iuh.fit.backend.dto.CandidateScore;
 import vn.edu.iuh.fit.backend.models.Candidate;
 import vn.edu.iuh.fit.backend.models.JobPosting;
 import vn.edu.iuh.fit.backend.models.Skill;
 import vn.edu.iuh.fit.backend.services.CandidateService;
 import vn.edu.iuh.fit.backend.services.CandidateSkillService;
 import vn.edu.iuh.fit.backend.services.JobPostingService;
-import vn.edu.iuh.fit.backend.services.OpenAIService;
+import vn.edu.iuh.fit.backend.services.MLService;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -145,6 +145,9 @@ public class HrController {
     @Autowired
     private JobPostingService jobPostingService;
 
+    @Autowired
+    private CandidateSkillService candidateSkillService;
+
     // Hiển thị danh sách ứng viên và bài đăng
     @GetMapping("/dashboard/hr")
     public String hrDashboard(Model model,
@@ -205,9 +208,41 @@ public class HrController {
 //        model.addAttribute("headerTitle", "Danh Sách Ứng Viên Công Việc (ID: " + id + ")");
 //        return "hrs/jobposting-candidate";
 //    }
+//    @Autowired
+//    private MLService mlService;
+//@GetMapping("/dashboard/jobposting/{id}")
+//public String listCandidatesByJobPosting(@PathVariable Long id, Model model) {
+//        JobPosting jobPosting = jobPostingService.getJobPostingById(id);
+//    Set<Candidate> candidates = candidateService.findCandidatesByJobPostingId(id);
+//    Map<Long, List<Skill>> candidateSkills = new HashMap<>();
+//
+//    List<Map<Candidate,Double >> candidateScores = new ArrayList<>();
+//    String jobDescription = jobPosting.getRequiredSkills()+jobPosting.getDescription()+jobPosting.getTitle()+jobPosting.getPosition()+jobPosting.getJobType();
+//    for (Candidate candidate : candidates) {
+//        List<Skill> skills = candidateService.findSkillsByCandidateId(candidate.getId());
+//        for (Skill skill : skills) {
+//           String candidateinfoSkill = skill.getSkillName()+skill.getSkillDescription()+skill.getType();
+//            double matchScore = mlService.getMatchScore(candidateinfoSkill, jobDescription);
+//            Map<Candidate,Double> candidateScore = new HashMap<>();
+//            candidateScore.put( candidate,matchScore);
+//            candidateScores.add(candidateScore);
+//            System.out.println("Match score: " + matchScore);
+//        }
+//
+//        candidateSkills.put(candidate.getId(), skills);
+//
+//    }
+//    candidateScores.sort((a, b) -> Double.compare((double) b.get("matchScore"), (double) a.get("matchScore")));
+//    model.addAttribute("candidateScores", candidateScores);
+//    model.addAttribute("jobPosting", jobPosting);
+//    model.addAttribute("candidates", candidates);
+//    model.addAttribute("candidateSkills", candidateSkills);
+//    model.addAttribute("headerTitle", "Danh Sách Ứng Viên Công Việc (ID: " + id + ")");
+//    return "hrs/jobposting-candidate";
+//}
 @GetMapping("/dashboard/jobposting/{id}")
 public String listCandidatesByJobPosting(@PathVariable Long id, Model model) {
-        JobPosting jobPosting = jobPostingService.getJobPostingById(id);
+    JobPosting jobPosting = jobPostingService.getJobPostingById(id);
     Set<Candidate> candidates = candidateService.findCandidatesByJobPostingId(id);
     Map<Long, List<Skill>> candidateSkills = new HashMap<>();
 
@@ -221,6 +256,7 @@ public String listCandidatesByJobPosting(@PathVariable Long id, Model model) {
     model.addAttribute("headerTitle", "Danh Sách Ứng Viên Công Việc (ID: " + id + ")");
     return "hrs/jobposting-candidate";
 }
+
 
 }
 

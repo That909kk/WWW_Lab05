@@ -25,4 +25,9 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company; // HR thuộc công ty nào
+
+    @OneToOne
+    @JoinColumn(name = "candidate_id") // Chỉ định khóa ngoại
+    private Candidate candidate; // Liên kết với Candidate
+
 }

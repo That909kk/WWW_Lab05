@@ -7,8 +7,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import vn.edu.iuh.fit.backend.repositories.UserRepository;
 
-import java.util.Collections;
-
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
@@ -38,10 +36,14 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
         throw new UsernameNotFoundException("User not found with username: " + username);
     }
     System.out.println("User found: " + username); // Log khi tìm thấy username
+    System.out.println("Role: " + user.getRole().name()); // Log role của user
+
     return org.springframework.security.core.userdetails.User
             .withUsername(user.getUsername())
             .password(user.getPassword())
             .roles(user.getRole().name())
             .build();
 }
+
+
 }

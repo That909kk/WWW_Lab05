@@ -16,19 +16,31 @@
             crossorigin="anonymous"></script>
     <style>
         .pagination a.active {
-            background-color: #FBD603;
+            background-color: #2b6466;
             border: 1px solid darkred;
+        }
+        .text-ellipsis {
+            max-width: 200px; /* Giới hạn chiều rộng phần mô tả */
+            white-space: nowrap; /* Không xuống dòng */
+            overflow: hidden; /* Ẩn phần bị tràn */
+            text-overflow: ellipsis; /* Hiển thị "..." khi nội dung vượt quá giới hạn */
         }
     </style>
 </head>
 <body>
 <div class="container mt-4">
+
     <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="text-center">HR Dashboard</h1>
         <div>
-            <a href="/dashboard" class="btn btn-info">Home</a>
-            <a href="/logout" class="btn btn-danger">Logout</a>
+            <!-- Hiển thị tên User đã login -->
+            <span>Xin chào, <strong th:text="${#authentication.principal.username}">User</strong></span>
+
+        </div>
+        <div>
+            <a href="/dashboard" style="margin-right: 20px" class="">Home</a>
+            <a href="/logout" class="">Logout</a>
         </div>
 
     </div>
@@ -55,12 +67,12 @@
         <tr th:each="jobposting : ${jobPostingPage.content}">
             <td th:text="${jobposting.id}"></td>
             <td th:text="${jobposting.title}"></td>
-            <td th:text="${jobposting.description}"></td>
+            <td class="text-ellipsis" th:text="${jobposting.description}"></td>
             <td th:text="${jobposting.postedAt}"></td>
             <td th:text="${jobposting.expiresAt}"></td>
             <td th:text="${jobposting.company.compName}"></td>
             <td th:text="${jobposting.status ? 'Đang Hoạt Động' : 'Không Hoạt Động'}"></td>
-            <td>
+            <td style="display: flex;flex-direction: row">
                 <button class="btn btn-warning btn-sm"
                         th:onclick="'confirmStatusChange(' + ${jobposting.id} + ')'">
                     Đổi Trạng Thái

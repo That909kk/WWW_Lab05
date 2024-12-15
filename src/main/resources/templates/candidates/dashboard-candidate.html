@@ -96,11 +96,25 @@
 </head>
 <body>
 <div class="container mt-4">
+
+    <!-- Phần hiển thị thông báo -->
+    <div th:if="${message}" class="alert alert-success" role="alert">
+        <span th:text="${message}"></span>
+    </div>
+    <div th:if="${error}" class="alert alert-danger" role="alert">
+        <span th:text="${error}"></span>
+    </div>
+
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Danh Sách Bài Đăng Tuyển Việc Làm</h1>
         <div>
-            <a href="/dashboard" class="btn btn-info">Home</a>
-            <a href="/logout" class="btn btn-danger">Logout</a>
+            <!-- Hiển thị tên User đã login -->
+
+            <span>Xin chào, <strong th:text="${#authentication.principal.username}">User</strong></span>
+        </div>
+        <div>
+            <a href="/dashboard" class="">Home</a>
+            <a href="/logout" class="">Logout</a>
         </div>
     </div>
     <table class="table table-hover">
@@ -124,6 +138,12 @@
             <td th:text="${jobposting.company.compName}"></td>
             <td>
                 <a th:href="@{/dashboard/xemthem/{id}(id=${jobposting.id})}" class="btn btn-info btn-sm">Xem Thêm</a>
+                <form th:action="@{/dashboard/apply}" method="post" style="display: inline;">
+                    <input type="hidden" name="jobPostingId" th:value="${jobposting.id}">
+                    <input type="hidden" name="username" th:value="${#authentication.principal.username}">
+
+                    <button type="submit" class="btn btn-success btn-sm">Ứng Tuyển</button>
+                </form>
             </td>
         </tr>
         </tbody>

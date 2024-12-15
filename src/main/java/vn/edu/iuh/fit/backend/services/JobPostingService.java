@@ -60,4 +60,12 @@ public class JobPostingService {
     public Page<JobPosting> findActiveJobPostings(Pageable pageable) {
         return jobPostingRepository.findByStatusTrue(pageable);
     }
+
+
+
+
+
+    public void save(JobPosting jobPosting) {
+        jobPostingRepository.save(jobPosting);
+    }
 }

@@ -67,7 +67,7 @@ public class JobPostingController {
     public String saveJobPosting(@ModelAttribute JobPosting jobPosting) {
         jobPosting.setPostedAt(LocalDate.now()); // Lưu ngày hiện tại
         jobPostingService.saveJobPosting(jobPosting);
-        return "redirect:/dashboard/candidate";
+        return "redirect:/dashboard/hr";
     }
 
 

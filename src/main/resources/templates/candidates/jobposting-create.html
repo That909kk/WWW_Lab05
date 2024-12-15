@@ -1,61 +1,92 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tạo Job Posting</title>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous">
 </head>
 <body>
-<h1>Tạo Job Posting Mới</h1>
-<form action="/dashboard/jobposting/save" method="post">
-    <div>
-        <label for="title">Tiêu Đề:</label>
-        <input type="text" id="title" name="title" required>
-    </div>
-    <div>
-        <label for="description">Mô Tả:</label>
-        <textarea id="description" name="description" required></textarea>
-    </div>
-    <div>
-        <label for="expiresAt">Ngày Kết Thúc:</label>
-        <input type="date" id="expiresAt" name="expiresAt" required>
-    </div>
-    <div>
-        <label for="position">Vị Trí:</label>
-        <input type="text" id="position" name="position" required>
-    </div>
-    <div>
-        <label for="requiredSkills">Kỹ Năng:</label>
-        <input type="text" id="requiredSkills" name="requiredSkills" placeholder="Java, Spring Boot, SQL" required>
-    </div>
-    <div>
-        <label for="suggestedSalary">Lương Đề Nghị:</label>
-        <input type="text" id="suggestedSalary" name="suggestedSalary">
-    </div>
-    <div>
-        <label for="yearOfExperience">Năm kinh nghiệm:</label>
-        <input type="text" id="yearOfExperience" name="yearOfExperience">
-    </div>
-    <div>
-        <label for="quantity">Năm kinh nghiệm:</label>
-        <input type="text" id="quantity" name="quantity">
-    </div>
-    <div>
-        <label for="status">Trạng Thái:</label>
-        <select id="status" name="status" required>
-            <option value="1">Mở</option>
-            <option value="0">Đóng</option>
-        </select>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <!-- Form Header -->
+            <h1 class="text-center mb-4">Tạo Job Posting Mới</h1>
 
+            <!-- Form Content -->
+            <form action="/dashboard/jobposting/save" method="post" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Tiêu Đề:</label>
+                    <input type="text" id="title" name="title" class="form-control" placeholder="Nhập tiêu đề công việc" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Mô Tả:</label>
+                    <textarea id="description" name="description" class="form-control" rows="3" placeholder="Nhập mô tả công việc" required></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="expiresAt" class="form-label">Ngày Kết Thúc:</label>
+                        <input type="date" id="expiresAt" name="expiresAt" class="form-control" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="position" class="form-label">Vị Trí:</label>
+                        <input type="text" id="position" name="position" class="form-control" placeholder="Nhập vị trí" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="requiredSkills" class="form-label">Kỹ Năng:</label>
+                    <input type="text" id="requiredSkills" name="requiredSkills" class="form-control"
+                           placeholder="VD: Java, Spring Boot, SQL" required>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="suggestedSalary" class="form-label">Lương Đề Nghị:</label>
+                        <input type="number" id="suggestedSalary" name="suggestedSalary" class="form-control" placeholder="VD: 10000000">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="yearOfExperience" class="form-label">Năm Kinh Nghiệm:</label>
+                        <input type="number" id="yearOfExperience" name="yearOfExperience" class="form-control" placeholder="VD: 2">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="quantity" class="form-label">Số Lượng Tuyển:</label>
+                        <input type="number" id="quantity" name="quantity" class="form-control" placeholder="VD: 5">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="status" class="form-label">Trạng Thái:</label>
+                        <select id="status" name="status" class="form-select" required>
+                            <option value="1">Mở</option>
+                            <option value="0">Đóng</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="companyId" class="form-label">Công Ty:</label>
+                    <select id="companyId" name="company.id" class="form-select" required>
+                        <option value="" selected disabled>Chọn công ty</option>
+                        <option th:each="company : ${companies}"
+                                th:value="${company.id}"
+                                th:text="${company.compName}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Tạo Job Posting</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div>
-        <label for="companyId">Công Ty:</label>
-        <select id="companyId" name="company.id" required>
-            <option th:each="company : ${companies}"
-                    th:value="${company.id}"
-                    th:text="${company.compName}">
-            </option>
-        </select>
-    </div>
-    <button type="submit">Tạo Job Posting</button>
-</form>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
 </body>
 </html>
