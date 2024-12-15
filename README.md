@@ -2,7 +2,8 @@
 ## Sinh viên 
 - **Họ và tên: Lê Minh Thật** 
 - **MSSV: 21086061** 
-
+- **Videodemo** 
+[Click để xem video](ImagesMD/demo.mp4)
 # Hướng Dẫn Cài Đặt và Sử Dụng Hệ Thống
 ## Công Nghệ Sử Dụng
 - **Frontend:** HTML, CSS, JavaScript, Bootstrap
@@ -70,6 +71,7 @@
 
 6. **Sử Dụng Ứng Dụng:**
    - Sau khi đăng nhập, hệ thống sẽ điều hướng bạn đến trang **Dashboard** theo **role** của người dùng.
+[Click để xem video](ImagesMD/demo.mp4)
 
 ## Lưu Ý
 - **Bảo mật API-key và mật khẩu ứng dụng** là rất quan trọng. Đảm bảo rằng bạn không chia sẻ hoặc lưu trữ các thông tin này ở nơi không an toàn.
