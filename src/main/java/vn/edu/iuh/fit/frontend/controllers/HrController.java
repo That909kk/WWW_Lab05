@@ -16,6 +16,7 @@ import vn.edu.iuh.fit.backend.models.Skill;
 import vn.edu.iuh.fit.backend.services.CandidateService;
 import vn.edu.iuh.fit.backend.services.CandidateSkillService;
 import vn.edu.iuh.fit.backend.services.JobPostingService;
+import vn.edu.iuh.fit.backend.services.OpenAIService;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -206,6 +207,7 @@ public class HrController {
 //    }
 @GetMapping("/dashboard/jobposting/{id}")
 public String listCandidatesByJobPosting(@PathVariable Long id, Model model) {
+        JobPosting jobPosting = jobPostingService.getJobPostingById(id);
     Set<Candidate> candidates = candidateService.findCandidatesByJobPostingId(id);
     Map<Long, List<Skill>> candidateSkills = new HashMap<>();
 
@@ -213,12 +215,13 @@ public String listCandidatesByJobPosting(@PathVariable Long id, Model model) {
         List<Skill> skills = candidateService.findSkillsByCandidateId(candidate.getId());
         candidateSkills.put(candidate.getId(), skills);
     }
-
+    model.addAttribute("jobPosting", jobPosting);
     model.addAttribute("candidates", candidates);
     model.addAttribute("candidateSkills", candidateSkills);
     model.addAttribute("headerTitle", "Danh Sách Ứng Viên Công Việc (ID: " + id + ")");
     return "hrs/jobposting-candidate";
 }
+
 }
 
 

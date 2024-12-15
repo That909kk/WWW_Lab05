@@ -72,6 +72,7 @@ public class CandidateService {
     }
 
 
-
-
+    public List<Skill> getSkillsByCandidateId(Long id) {
+        return candidateSkillRepository.findSkillsByCandidateId(id);
+    }
 }

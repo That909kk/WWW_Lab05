@@ -104,7 +104,7 @@
             <th>Địa Chỉ</th>
             <th>Điện Thoại</th>
             <th>Email</th>
-            <th>Hành Động</th>
+<!--            <th>Hành Động</th>-->
         </tr>
         </thead>
         <tbody>
@@ -116,10 +116,10 @@
             <td th:text="${candidate.phone}"></td>
             <td th:text="${candidate.email}"></td>
 
-            <td>
-                <a th:href="@{/edit/{id}(id=${candidate.id})}" class="btn btn-warning btn-sm">Edit</a>
-                <a th:href="@{/delete/{id}(id=${candidate.id})}" class="btn btn-danger btn-sm">Delete</a>
-            </td>
+<!--            <td>-->
+<!--                <a th:href="@{/edit/{id}(id=${candidate.id})}" class="btn btn-warning btn-sm">Edit</a>-->
+<!--                <a th:href="@{/delete/{id}(id=${candidate.id})}" class="btn btn-danger btn-sm">Delete</a>-->
+<!--            </td>-->
         </tr>
         </tbody>
     </table>

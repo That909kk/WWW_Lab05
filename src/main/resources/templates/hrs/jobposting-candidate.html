@@ -1,43 +1,200 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh Sách Ứng Viên Công Việc</title>
+    <!-- Thêm Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f4f6f9;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #343a40;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        .table th {
+            background-color: #007bff;
+            color: white;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .table td {
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .table-bordered {
+            border: 2px solid #dee2e6;
+        }
+
+        /* Nút "Interview" */
+        .btn-custom {
+            background-color: #17a2b8; /* Xanh nhạt */
+            color: white;
+            font-size: 1rem;
+            padding: 8px 16px;
+            border-radius: 5px;
+            width: 100%;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        /* Nút "Reject" */
+        .btn-custom-reject {
+            background-color: #ffc107; /* Cam nhạt */
+            color: white;
+            font-size: 1rem;
+            padding: 8px 16px;
+            border-radius: 5px;
+            width: 100%;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        /* Hover effect */
+        .btn-custom:hover {
+            background-color: #138496; /* Xanh đậm */
+        }
+
+        .btn-custom-reject:hover {
+            background-color: #e0a800; /* Cam đậm */
+        }
+
+        .back-btn {
+            margin-top: 30px;
+            font-size: 1rem;
+            display: inline-block;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+
+        .alert {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        /* Thêm kiểu cho các liên kết */
+        .footer {
+            margin-top: 50px;
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .footer a {
+            color: #ffc107;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
 </head>
 <body>
-<h1 th:text="${headerTitle}">Danh Sách Ứng Viên Công Việc</h1>
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Tên</th>
-        <th>Email</th>
-        <th>Số Điện Thoại</th>
-        <th>Kỹ Năng</th> <!-- Thêm cột kỹ năng -->
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="candidate : ${candidates}">
-        <td th:text="${candidate.id}"></td>
-        <td th:text="${candidate.fullName}"></td>
-        <td th:text="${candidate.email}"></td>
-        <td th:text="${candidate.phone}"></td>
-        <td>
-            <ul>
-                <!-- Hiển thị danh sách kỹ năng -->
-                <li th:each="skill : ${candidateSkills[candidate.id]}" th:text="${skill.skillName}"></li>
-            </ul>
-        </td>
 
-        <td>
-            <a th:href="@{/interview(candidateId=${candidate.id}, jobTitle='Java Developer', interviewDate='2024-12-20')}"
-               class="btn btn-success">Interview</a>
+<div class="container">
+    <h1 th:text="${headerTitle}">Danh Sách Ứng Viên Công Việc</h1>
 
-        </td>
-    </tr>
-    </tbody>
-</table>
-<a href="/dashboard/hr">Quay Lại</a>
+    <!-- Hiển thị thông báo nếu có -->
+    <div th:if="${message}" class="alert alert-success">
+        <p th:text="${message}"></p>
+
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Email</th>
+            <th>Số Điện Thoại</th>
+            <th>Kỹ Năng</th> <!-- Thêm cột kỹ năng -->
+            <th>Phỏng Vấn</th> <!-- Cột Ngày Phỏng Vấn -->
+            <th>đề xuất</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="candidate : ${candidates}">
+            <td th:text="${candidate.id}"></td>
+            <td th:text="${candidate.fullName}"></td>
+            <td th:text="${candidate.email}"></td>
+            <td th:text="${candidate.phone}"></td>
+
+            <td>
+                <ul>
+                    <!-- Hiển thị danh sách kỹ năng -->
+                    <li th:each="skill : ${candidateSkills[candidate.id]}" th:text="${skill.skillName}"></li>
+                </ul>
+            </td>
+
+            <!-- Thêm ô nhập ngày phỏng vấn -->
+            <td>
+                <form style="display: flex;flex-direction: row" th:action="@{/interview}" method="get">
+                    <input type="hidden" name="candidateId" th:value="${candidate.id}" />
+                    <input type="hidden" name="jobTitle" th:value="${jobPosting.title}" />
+                    <input type="hidden" name="jobPostingId" th:value="${jobPosting.id}" />
+
+                    <input style="margin-right: 10px" type="date" id="interviewDate" name="interviewDate" class="form-control"
+                           th:value="${interviewDate != null ? interviewDate : #dates.format(#dates.createNow(), 'yyyy-MM-dd')}" />
+
+                    <button type="submit" class="btn btn-custom">Interview</button>
+                </form>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/dashboard/hr" class="back-btn">Quay Lại</a>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>© 2024 WebViệcLàm | <a href="#">Chính sách bảo mật</a> | <a href="#">Liên hệ</a></p>
+</div>
+
+<!-- Thêm Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+<script>
+    // Tự động điền ngày hiện tại + 7 ngày nếu không nhập
+    document.addEventListener('DOMContentLoaded', function() {
+        const inputDate = document.getElementById('interviewDate');
+        if (!inputDate.value) {
+            let today = new Date();
+            today.setDate(today.getDate() + 7);  // Cộng thêm 7 ngày
+            const formattedDate = today.toISOString().split('T')[0];  // Định dạng lại thành yyyy-MM-dd
+            inputDate.value = formattedDate;  // Gán giá trị cho ô nhập
+        }
+    });
+</script>
+
+
 </body>
 </html>
+

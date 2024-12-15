@@ -1,57 +1,162 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-        <title>Job Posting Details</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chi Tiết Công Việc</title>
+        <!-- Thêm Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <style>
+                body {
+                        background-color: #f4f7fc;
+                        font-family: 'Arial', sans-serif;
+                }
+
+                .container {
+                        margin-top: 50px;
+                        background-color: white;
+                        padding: 30px;
+                        border-radius: 10px;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                }
+
+                h1 {
+                        text-align: center;
+                        color: #343a40;
+                        margin-bottom: 30px;
+                }
+
+                .table th {
+                        background-color: white;
+                        color: black;
+                        font-size: 1.1rem;
+                        text-align: left;
+                }
+
+                .table td {
+                        font-size: 1rem;
+                        text-align: left;
+                }
+
+                .table-bordered {
+                        border: 2px solid #dee2e6;
+                }
+
+                .btn-custom {
+                        background-color: #28a745;
+                        color: white;
+                        font-size: 1.2rem;
+                        padding: 10px 20px;
+                        border-radius: 5px;
+                        width: 100%;
+                        transition: background-color 0.3s;
+                        text-align: center;
+                }
+
+                .btn-custom:hover {
+                        background-color: #218838;
+                }
+
+                .back-btn {
+                        margin-top: 30px;
+                        font-size: 1rem;
+                        display: inline-block;
+                        color: #007bff;
+                        text-decoration: none;
+                        font-weight: bold;
+                }
+
+                .back-btn:hover {
+                        text-decoration: underline;
+                }
+
+                .footer {
+                        margin-top: 50px;
+                        background-color: #343a40;
+                        color: white;
+                        text-align: center;
+                        padding: 15px;
+                }
+
+                .footer a {
+                        color: #ffc107;
+                        text-decoration: none;
+                }
+
+                .footer a:hover {
+                        text-decoration: underline;
+                }
+
+        </style>
 </head>
 <body>
-<h1>Chi Tiết Công Việc</h1>
-<table>
-        <tr>
-                <th>Tiêu Đề:</th>
-                <td th:text="${jobPosting.title}">[Tiêu Đề]</td>
-        </tr>
-        <tr>
-                <th>Mô Tả:</th>
-                <td th:text="${jobPosting.description}">[Mô Tả]</td>
-        </tr>
-        <tr>
-                <th>Ngày Đăng:</th>
-                <td th:text="${jobPosting.postedAt}">[Ngày Đăng]</td>
-        </tr>
-        <tr>
-                <th>Ngày Kết Thúc:</th>
-                <td th:text="${jobPosting.expiresAt}">[Ngày Kết Thúc]</td>
-        </tr>
-        <tr>
-                <th>Vị Trí:</th>
-                <td th:text="${jobPosting.position}">[Vị Trí]</td>
-        </tr>
-        <tr>
-                <th>Kỹ năng cần có:</th>
-                <td th:text="${jobPosting.requiredSkills}">[Kỹ Năng]</td>
-        </tr>
-        <tr>
-                <th>Lương đề nghị:</th>
-                <td th:text="${jobPosting.suggestedSalary}">[Lương]</td>
-        </tr>
-        <tr>
-                <th>Người Phỏng Vấn:</th>
-                <td th:text="${jobPosting.company.compName}">[Người Phỏng Vấn]</td>
-        </tr>
-        <tr>
-                <th>Số lượng:</th>
-                <td th:text="${jobPosting.quantity}">[Số lượng]</td>
-        </tr>
-        <tr>
-                <th>Liên hệ:</th>
-                <td th:text="${jobPosting.company.compName}">[Người Phỏng Vấn:]</td>
-                <td th:text="${jobPosting.company.email}">[Email:]</td>
-                <td th:text="${jobPosting.company.phone}">[Điện thoại:]</td>
-                <td th:text="${jobPosting.company.webUrl}">[Website:]</td>
-        </tr>
+
+<div class="container">
+        <h1>Chi Tiết Công Việc</h1>
+        <table>
+                <tr>
+                        <th style="margin-right:10px ">Công Ty:</th>
+                        <td th:text="${jobPosting.company.compName}">[Công Ty]</td>
+                        <th style="margin-right:10px ">Email:</th>
+                        <td th:text="${jobPosting.company.email}">[Email]</td>
+                        <th style="margin-right:10px " >Điện Thoại:</th>
+                        <td th:text="${jobPosting.company.phone}">[Điện Thoại]</td>
+                        <th style="margin-right:10px ">Website:</th>
+                        <td th:text="${jobPosting.company.webUrl}">[Website]</td>
+                </tr>
+        </table>
+        <table class="table table-bordered">
+                <tr>
+                        <th>Tiêu Đề:</th>
+                        <td th:text="${jobPosting.title}">[Tiêu Đề]</td>
+                </tr>
+                <tr>
+                        <th>Mô Tả:</th>
+                        <td th:text="${jobPosting.description}">[Mô Tả]</td>
+                </tr>
+                <tr>
+                        <th>Ngày Đăng:</th>
+                        <td th:text="${jobPosting.postedAt}">[Ngày Đăng]</td>
+                </tr>
+                <tr>
+                        <th>Ngày Kết Thúc:</th>
+                        <td th:text="${jobPosting.expiresAt}">[Ngày Kết Thúc]</td>
+                </tr>
+                <tr>
+                        <th>Vị Trí:</th>
+                        <td th:text="${jobPosting.position}">[Vị Trí]</td>
+                </tr>
+                <tr>
+                        <th>Kỹ Năng cần có:</th>
+                        <td th:text="${jobPosting.requiredSkills}">[Kỹ Năng]</td>
+                </tr>
+                <tr>
+                        <th>Lương đề nghị:</th>
+                        <td th:text="${jobPosting.suggestedSalary}">[Lương]</td>
+                </tr>
+                <tr>
+                        <th>Người Phỏng Vấn:</th>
+                        <td th:text="${jobPosting.company.compName}">[Người Phỏng Vấn]</td>
+                </tr>
+                <tr>
+                        <th>Số lượng:</th>
+                        <td th:text="${jobPosting.quantity}">[Số lượng]</td>
+                </tr>
+                <!-- Gộp phần liên hệ vào một cột -->
+
+        </table>
 
 
-</table>
-<a href="javascript:history.back()">Quay Lại Danh Sách</a>
+        <a href="javascript:history.back()" class="back-btn">Quay Lại Danh Sách</a>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+        <p>© 2024 WebViệcLàm | <a href="#">Chính sách bảo mật</a> | <a href="#">Liên hệ</a></p>
+</div>
+
+<!-- Thêm Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
 </body>
 </html>
