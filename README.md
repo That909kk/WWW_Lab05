@@ -2,7 +2,7 @@
 ## Sinh viên 
 - **Họ và tên: Lê Minh Thật** 
 - **MSSV: 21086061** 
-- **Videodemo: ** 
+- **Videodemo:** 
 [Click để xem video trên YouTube](https://youtu.be/aDeJ7ret4EI)
 # Hướng Dẫn Cài Đặt và Sử Dụng Hệ Thống
 ## Công Nghệ Sử Dụng
