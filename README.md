@@ -10,6 +10,7 @@
 - **Backend:** Java, Spring Boot, Spring Data JPA, MariaDB, tích hợp ChatGPT (API Key không đủ tiền), Ollama gema2:9b (AI chạy gây tràn RAM máy tính nên không thể demo được)
 - **Database:** HeidiSQL
 - **IDE:** IntelliJ IDEA
+- **Documentation:** README.md
 - **Version Control:** Git, GitHub
 
 ## Tính Năng
@@ -99,3 +100,6 @@
 ![Chào Mừng Đến Với Web Việc Làm](ImagesMD/List-candidates-paging.png)
 ### Trang ứng cử viên đã ứng cử bản tin công việc đó:
 ![Chào Mừng Đến Với Web Việc Làm](ImagesMD/List-candidates-apply-for-a-jobposting.png)
+## 👨‍💻 Tác Giả:
+## That909kk
+## 🌐 GitHub: [That909kk](https://github.com/That909kk)
