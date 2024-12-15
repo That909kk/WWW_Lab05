@@ -75,4 +75,25 @@
 - **Bảo mật API-key và mật khẩu ứng dụng** là rất quan trọng. Đảm bảo rằng bạn không chia sẻ hoặc lưu trữ các thông tin này ở nơi không an toàn.
 
 ## Hình Minh Họa
+### Trang index:
 ![Chào Mừng Đến Với Web Việc Làm](ImagesMD/index.png)
+### Trang login:
+![Chào Mừng Đến Với Web Việc Làm](ImagesMD/Login.png)
+### Trang logout:
+![Chào Mừng Đến Với Web Việc Làm](ImagesMD/Logout.png)
+### Trang Admin Dashboard:
+![Chào Mừng Đến Với Web Việc Làm](ImagesMD/Admin-Dashboard.png)
+### Trang HR Dashboard:
+![Chào Mừng Đến Với Web Việc Làm](ImagesMD/HR-Dashboard.png)
+### Trang Candidate Dashboard:
+![Chào Mừng Đến Với Web Việc Làm](ImagesMD/Candidate-Dashboard.png)
+### Trang Ứng tuyển thất bại:
+![Chào Mừng Đến Với Web Việc Làm](ImagesMD/Apply-job-fail.png)
+### Trang Ứng tuyển thành công:
+![Chào Mừng Đến Với Web Việc Làm](ImagesMD/Apply-job-success.png)
+### Trang tạo bản tin:
+![Chào Mừng Đến Với Web Việc Làm](ImagesMD/Create-JobPosting.png)
+### Trang ứng cử viên dược phân trang:
+![Chào Mừng Đến Với Web Việc Làm](ImagesMD/List-candidates-paging.png)
+### Trang ứng cử viên đã ứng cử bản tin công việc đó:
+![Chào Mừng Đến Với Web Việc Làm](ImagesMD/List-candidates-apply-for-a-jobposting.png)
